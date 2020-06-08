@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ConfigButton from './ConfigButton';
 
 class Start extends Component {
   constructor(props) {
@@ -11,24 +12,38 @@ class Start extends Component {
     };
   }
 
+  switchButton() {
+    const { name, email } = this.state;
+    if (name.length > 0 && email.length > 0) {
+      this.setState({
+        disabledButton: false,
+      });
+    } else {
+      this.setState({
+        disabledButton: true,
+      });
+    }
+  }
+
   handleChangeName(event) {
     this.setState({
       name: event.target.value,
-      disabledButton: false,
     });
+    this.switchButton();
   }
 
   handleChangeEmail(event) {
     this.setState({
       email: event.target.value,
-      disabledButton: false,
     });
+    this.switchButton();
   }
 
   render() {
     const { disabledButton } = this.state;
     return (
       <div>
+        <ConfigButton />
         <label htmlFor="name">Insert your name</label>
         <input
           id="name"
@@ -43,7 +58,7 @@ class Start extends Component {
         <button
           disabled={disabledButton}
           data-testid="btn-play"
-        >Play
+        >Jogar
         </button>
       </div>
     );
