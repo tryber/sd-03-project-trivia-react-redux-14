@@ -8,14 +8,14 @@ import Ranking from './pages/Ranking';
 
 export default function App() {
   return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/game" component={Game} />
-          <Route path="/settings" component={Settings} />
-          <Route path="/feedback" component={Feedback} />
-          <Route path="/ranking" component={Ranking} />
-        </Switch>
-      </BrowserRouter>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/game" component={Game} />
+        <Route path="/settings" component={Settings} />
+        <Route path="/feedback" component={Feedback} />
+        <Route path="/ranking" component={Ranking} />
+      </Switch>
+    </BrowserRouter>
   );
 }
