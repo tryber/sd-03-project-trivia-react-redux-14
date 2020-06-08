@@ -7,7 +7,7 @@ class Start extends Component {
     this.state = {
       name: '',
       email: '',
-      disabledButton: true
+      disabledButton: true,
     };
   }
 
@@ -15,28 +15,36 @@ class Start extends Component {
     this.setState({
       name: event.target.value,
       disabledButton: false,
-    })
+    });
   }
 
   handleChangeEmail(event) {
     this.setState({
       email: event.target.value,
       disabledButton: false,
-    })
+    });
   }
 
   render() {
-    const {name, email, disabledButton} = this.state;
+    const { disabledButton } = this.state;
     return (
       <div>
-        <label>Insert your name</label>
+        <label htmlFor="name">Insert your name</label>
         <input
-        data-testid="input-player-name"
-        onChange={(e) => this.handleChangeName(e)}
+          id="name"
+          data-testid="input-player-name"
+          onChange={(e) => this.handleChangeName(e)}
         />
-        <label>Insert your email</label>
-        <input onChange={(e) => this.handleChangeEmail(e)} data-testid="input-gravatar-email" />
-        <button disabled={disabledButton} data-testid="btn-play">Play</button>
+        <label htmlFor="email">Insert your email</label>
+        <input
+          id="email"
+          onChange={(e) => this.handleChangeEmail(e)} data-testid="input-gravatar-email"
+        />
+        <button
+          disabled={disabledButton}
+          data-testid="btn-play"
+        >Play
+        </button>
       </div>
     );
   }
