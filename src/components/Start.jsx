@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+
+import tokenApi from '../services/tokenApi';
+
+import questionsApi from '../services/questionsApi';
 import ConfigButton from './ConfigButton';
+import { Link } from 'react-router-dom';
 
 class Start extends Component {
   constructor(props) {
@@ -39,6 +44,13 @@ class Start extends Component {
     this.switchButton();
   }
 
+  requestApi() {
+    tokenApi()
+      .then((data) => console.log(localStorage.getItem('token')))
+      .then(questionsApi);
+
+  }
+
   render() {
     const { disabledButton } = this.state;
     return (
@@ -55,11 +67,14 @@ class Start extends Component {
           id="email"
           onChange={(e) => this.handleChangeEmail(e)} data-testid="input-gravatar-email"
         />
-        <button
-          disabled={disabledButton}
-          data-testid="btn-play"
-        >Jogar
+        <Link to='/game'>
+          <button
+            disabled={disabledButton}
+            data-testid="btn-play"
+            onClick={this.requestApi}
+          >Jogar
         </button>
+        </Link>
       </div>
     );
   }
