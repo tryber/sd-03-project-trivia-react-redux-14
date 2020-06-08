@@ -11,6 +11,7 @@ export default function App() {
           SUA VEZ
         </p>
       </header>
+      <aside></aside>
     </div>
   );
 }
