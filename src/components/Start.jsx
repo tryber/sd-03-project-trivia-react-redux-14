@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import tokenApi from '../services/tokenApi';
+import updateEmail from '../redux/actions/emailAction';
+import updateName from '../redux/actions/nameAction';
 import questionsApi from '../services/questionsApi';
 import ConfigButton from './ConfigButton';
 
@@ -11,71 +14,67 @@ const requestApi = () => {
     .then(questionsApi);
 };
 
-class Start extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      name: '',
-      email: '',
-      disabledButton: true,
-    };
+const disabledButton = (email, name) => {
+  if (name !== '' && email !== '') {
+    return false;
   }
+  return true;
+};
 
-  switchButton() {
-    const { name, email } = this.state;
-    if (name.length > 0 && email.length > 0) {
-      this.setState({
-        disabledButton: false,
-      });
-    } else {
-      this.setState({
-        disabledButton: true,
-      });
-    }
-  }
-
-  handleChangeName(event) {
-    this.setState({
-      name: event.target.value,
-    });
-    this.switchButton();
-  }
-
-  handleChangeEmail(event) {
-    this.setState({
-      email: event.target.value,
-    });
-    this.switchButton();
-  }
-
-  render() {
-    const { disabledButton } = this.state;
-    return (
-      <div>
-        <ConfigButton />
-        <label htmlFor="name">Insert your name</label>
-        <input
-          id="name"
-          data-testid="input-player-name"
-          onChange={(e) => this.handleChangeName(e)}
-        />
-        <label htmlFor="email">Insert your email</label>
-        <input
-          id="email"
-          onChange={(e) => this.handleChangeEmail(e)} data-testid="input-gravatar-email"
-        />
-        <Link to="/game">
-          <button
-            disabled={disabledButton}
-            data-testid="btn-play"
-            onClick={requestApi}
-          >Jogar
+const Start = (props) => {
+  const { dispatchEmail, dispatchName, email, name } = props;
+  console.log(props);
+  return (
+    <div>
+      <ConfigButton />
+      <label htmlFor="name">Insert your name</label>
+      <input
+        id="name"
+        data-testid="input-player-name"
+        onChange={(e) => dispatchName(e.target.value)}
+      />
+      <label htmlFor="email">Insert your email</label>
+      <input
+        id="email"
+        onChange={(e) => dispatchEmail(e.target.value)} data-testid="input-gravatar-email"
+      />
+      <Link to="/game">
+        <button
+          disabled={disabledButton(email, name)}
+          data-testid="btn-play"
+          onClick={requestApi}
+        >Jogar
         </button>
-        </Link>
-      </div>
-    );
-  }
-}
+      </Link>
+    </div>
+  );
+};
 
-export default Start;
+const mapStateToProps = (state) => ({
+  email: state.emailReducer.email,
+  name: state.nameReducer.name,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dispatchEmail: (e) => dispatch(updateEmail(e)),
+  dispatchName: (e) => dispatch(updateName(e)),
+});
+
+Start.propTypes = {
+  email: PropTypes.string,
+  name: PropTypes.string,
+  dispatchEmail: PropTypes.func,
+  dispatchName: PropTypes.func,
+};
+
+Start.defaultProps = {
+  email: '',
+  name: '',
+  dispatchEmail: this.dispatchEmail,
+  dispatchName: this.dispatchName,
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Start);
