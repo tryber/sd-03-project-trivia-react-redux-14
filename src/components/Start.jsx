@@ -70,8 +70,8 @@ Start.propTypes = {
 Start.defaultProps = {
   email: '',
   name: '',
-  dispatchEmail: this.dispatchEmail,
-  dispatchName: this.dispatchName,
+  dispatchEmail: '',
+  dispatchName: '',
 };
 
 export default connect(
