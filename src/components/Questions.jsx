@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 
-export class Questions extends Component {
+class Questions extends Component {
   render() {
+    // const questions = localStorage.getItem('questions')
+    // console.log(questions)
     return (
-      <div>
-        <p>Testing questions page</p>
+      <div className="questions">
+        <h3>Category: </h3>
       </div>
     );
   }

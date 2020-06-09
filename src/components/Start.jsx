@@ -10,7 +10,7 @@ import ConfigButton from './ConfigButton';
 
 const requestApi = () => {
   tokenApi()
-    .then(console.log(localStorage.getItem('token')))
+    .then(localStorage.getItem('token'))
     .then(questionsApi);
 };
 
@@ -23,7 +23,6 @@ const disabledButton = (email, name) => {
 
 const Start = (props) => {
   const { dispatchEmail, dispatchName, email, name } = props;
-  console.log(props);
   return (
     <div>
       <ConfigButton />
