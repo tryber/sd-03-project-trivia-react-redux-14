@@ -9,7 +9,7 @@ function categoryAndQuestion(questionsCategory, object, idTest) {
         'carregando...' : questionsCategory.map((categoryOrQuest) => categoryOrQuest[object])[0]}
     </p>
   );
-};
+}
 
 class Questions extends Component {
   render() {
@@ -24,9 +24,9 @@ class Questions extends Component {
           </button>)[0]}
         {questionsCategory === undefined ? 'carregando...' : questionsCategory.map((el) =>
           el.incorrect_answers.map((incorrectAnswer, index) =>
-          <button data-testid={`wrong-answer-${index}`}>
-            {incorrectAnswer}
-          </button>))[0]}
+            <button data-testid={`wrong-answer-${index}`}>
+              {incorrectAnswer}
+            </button>))[0]}
       </div>
     );
   }
