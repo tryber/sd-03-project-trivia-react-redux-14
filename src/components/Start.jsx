@@ -13,8 +13,8 @@ const requestApi = (dispatchQuestions) => {
     .then(
       fetch(`https://opentdb.com/api.php?amount=5&token=${localStorage.getItem('token')}`)
         .then((response) => response.json())
-        .then((data) => dispatchQuestions(data))
-    )
+        .then((data) => dispatchQuestions(data)),
+    );
 };
 
 const disabledButton = (email, name) => {
@@ -68,6 +68,7 @@ Start.propTypes = {
   name: PropTypes.string,
   dispatchEmail: PropTypes.func,
   dispatchName: PropTypes.func,
+  dispatchQuestions: PropTypes.func,
 };
 
 Start.defaultProps = {
@@ -75,6 +76,7 @@ Start.defaultProps = {
   name: '',
   dispatchEmail: '',
   dispatchName: '',
+  dispatchQuestions: '',
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Start);
