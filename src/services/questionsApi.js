@@ -1,5 +1,5 @@
-import updateQuestions from '../redux/actions/questionsAction';
 import { connect } from 'react-redux';
+import updateQuestions from '../redux/actions/questionsAction';
 
 const questionsApi = () => {
   const token = localStorage.getItem('token');
@@ -10,13 +10,11 @@ const questionsApi = () => {
     .then((data) => console.log(data));
 };
 
-
-
 const mapDispatchToProps = (dispatch) => ({
   dispatchQuestions: (e) => dispatch(updateQuestions(e)),
 });
 
 export default connect(
   null,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(questionsApi);
