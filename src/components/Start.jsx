@@ -5,13 +5,16 @@ import PropTypes from 'prop-types';
 import tokenApi from '../services/tokenApi';
 import updateEmail from '../redux/actions/emailAction';
 import updateName from '../redux/actions/nameAction';
-import questionsApi from '../services/questionsApi';
+import updateQuestions from '../redux/actions/questionsAction';
 import ConfigButton from './ConfigButton';
 
-const requestApi = () => {
+const requestApi = (dispatchQuestions) => {
   tokenApi()
-    .then(localStorage.getItem('token'))
-    .then(questionsApi);
+    .then(
+      fetch(`https://opentdb.com/api.php?amount=5&token=${localStorage.getItem('token')}`)
+        .then((response) => response.json())
+        .then((data) => dispatchQuestions(data)),
+    );
 };
 
 const disabledButton = (email, name) => {
@@ -22,7 +25,7 @@ const disabledButton = (email, name) => {
 };
 
 const Start = (props) => {
-  const { dispatchEmail, dispatchName, email, name } = props;
+  const { dispatchEmail, dispatchName, email, name, dispatchQuestions } = props;
   return (
     <div>
       <ConfigButton />
@@ -41,7 +44,7 @@ const Start = (props) => {
         <button
           disabled={disabledButton(email, name)}
           data-testid="btn-play"
-          onClick={requestApi}
+          onClick={() => requestApi(dispatchQuestions)}
         >Jogar
         </button>
       </Link>
@@ -57,6 +60,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dispatchEmail: (e) => dispatch(updateEmail(e)),
   dispatchName: (e) => dispatch(updateName(e)),
+  dispatchQuestions: (e) => dispatch(updateQuestions(e)),
 });
 
 Start.propTypes = {
@@ -64,6 +68,7 @@ Start.propTypes = {
   name: PropTypes.string,
   dispatchEmail: PropTypes.func,
   dispatchName: PropTypes.func,
+  dispatchQuestions: PropTypes.func,
 };
 
 Start.defaultProps = {
@@ -71,9 +76,7 @@ Start.defaultProps = {
   name: '',
   dispatchEmail: '',
   dispatchName: '',
+  dispatchQuestions: '',
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Start);
+export default connect(mapStateToProps, mapDispatchToProps)(Start);
