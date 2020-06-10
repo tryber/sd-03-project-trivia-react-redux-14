@@ -18,10 +18,10 @@ class Questions extends Component {
       <div className="questions">
         {categoryAndQuestion(questionsCategory, 'category', 'question-category')}
         {categoryAndQuestion(questionsCategory, 'question', 'question-text')}
-        {questionsCategory === undefined ? 'carregando...' : questionsCategory.map((correctAnswer) =>
-          <button data-testid="correct-answer">
-            {correctAnswer.correct_answer}
-          </button>)[0]}
+        <button data-testid="correct-answer">
+          {questionsCategory === undefined ? 'carregando...' : questionsCategory.map((correctAnswer) =>
+              correctAnswer.correct_answer)[0]}
+        </button>
         {questionsCategory === undefined ? 'carregando...' : questionsCategory.map((el) =>
           el.incorrect_answers.map((incorrectAnswer, index) =>
             <button data-testid={`wrong-answer-${index}`}>
