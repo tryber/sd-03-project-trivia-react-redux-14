@@ -1,16 +1,32 @@
 import React from 'react';
-import logo from './trivia.png';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+
+import Settings from './pages/Settings';
+import Home from './pages/Home';
+import GamePage from './pages/GamePage';
+
 import './App.css';
 
 export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          SUA VEZ
-        </p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route
+          exact
+          path="/"
+          component={Home}
+        />
+        <Route
+          exact
+          path="/settings"
+          component={Settings}
+        />
+        <Route
+          exact
+          path="/game"
+          component={GamePage}
+        />
+      </Switch>
+    </BrowserRouter>
   );
 }
