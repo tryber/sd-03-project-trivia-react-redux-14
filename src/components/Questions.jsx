@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import '../styles/questions.css';
+
 function categoryAndQuestion(questionsCategory, object, idTest) {
   return (
     <p data-testid={idTest}>
@@ -12,19 +14,47 @@ function categoryAndQuestion(questionsCategory, object, idTest) {
 }
 
 class Questions extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      answer: false,
+    };
+    this.toggleClass = this.toggleClass.bind(this);
+  }
+
+
+  toggleClass() {
+    this.setState({
+      answer: true,
+    });
+  }
+
   render() {
     const { questionsCategory } = this.props;
+    const { answer, disabledButton } = this.state;
     return (
       <div className="questions">
         {categoryAndQuestion(questionsCategory, 'category', 'question-category')}
         {categoryAndQuestion(questionsCategory, 'question', 'question-text')}
-        {questionsCategory === undefined ? 'carregando...' : questionsCategory.map((correctAnswer) =>
-          <button data-testid="correct-answer">
+        {questionsCategory === undefined ? 'loading...' : questionsCategory.map((correctAnswer) =>
+          <button
+            className={answer ? 'correct-answer' : null}
+            data-testid="correct-answer"
+            onClick={() => this.toggleClass()}
+            disabled={disabledButton}
+          >
             {correctAnswer.correct_answer}
           </button>)[0]}
-        {questionsCategory === undefined ? 'carregando...' : questionsCategory.map((el) =>
+        {questionsCategory === undefined ? 'loading...' : questionsCategory.map((el) =>
           el.incorrect_answers.map((incorrectAnswer, index) =>
-            <button data-testid={`wrong-answer-${index}`}>
+            <button
+              disabled={disabledButton}
+              className={answer ? 'wrong-answer' : null}
+              data-testid={`wrong-answer-${index}`}
+              key={incorrectAnswer}
+              onClick={() => this.toggleClass()}
+            >
               {incorrectAnswer}
             </button>))[0]}
       </div>
@@ -37,7 +67,7 @@ const mapStateToProps = (state) => ({
 });
 
 Questions.propTypes = {
-  questionsCategory: PropTypes.func,
+  questionsCategory: PropTypes.arrayOf(PropTypes.string),
 };
 
 export default connect(mapStateToProps)(Questions);

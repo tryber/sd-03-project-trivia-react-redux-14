@@ -8,7 +8,19 @@ import updateName from '../redux/actions/nameAction';
 import updateQuestions from '../redux/actions/questionsAction';
 import ConfigButton from './ConfigButton';
 
-const requestApi = (dispatchQuestions) => {
+const requestApi = ({ email, name, dispatchQuestions }) => {
+  const initialState = {
+    player: {
+      name,
+      assertions: 0,
+      score: 0,
+      gravatarEmail: email,
+    },
+  };
+  const stringyState = JSON.stringify(initialState);
+  localStorage.setItem('state', stringyState);
+  console.log(JSON.parse(localStorage.getItem('state')));
+
   tokenApi()
     .then(
       fetch(`https://opentdb.com/api.php?amount=5&token=${localStorage.getItem('token')}`)
@@ -25,7 +37,7 @@ const disabledButton = (email, name) => {
 };
 
 const Start = (props) => {
-  const { dispatchEmail, dispatchName, email, name, dispatchQuestions } = props;
+  const { dispatchEmail, dispatchName, email, name } = props;
   return (
     <div>
       <ConfigButton />
@@ -44,7 +56,7 @@ const Start = (props) => {
         <button
           disabled={disabledButton(email, name)}
           data-testid="btn-play"
-          onClick={() => requestApi(dispatchQuestions)}
+          onClick={() => requestApi(props)}
         >Jogar
         </button>
       </Link>
@@ -68,7 +80,6 @@ Start.propTypes = {
   name: PropTypes.string,
   dispatchEmail: PropTypes.func,
   dispatchName: PropTypes.func,
-  dispatchQuestions: PropTypes.func,
 };
 
 Start.defaultProps = {
