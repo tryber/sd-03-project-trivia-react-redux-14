@@ -11,14 +11,14 @@ export class Header extends Component {
       .toLowerCase()}.jpg`;
     return (
       <div>
-        <img
-          data-testid="header-profile-picture"
-          alt="Profile gravatar"
-          src={gravatarIMG}
-        />
-        <p data-testid="header-player-name">Jogador :{name}</p>
-        <p data-testid="header-score">Score :</p>
-      </div>
+      <p data-testid="header-score">0</p>
+      <p data-testid="header-player-name">{name}</p>
+      <img
+        data-testid="header-profile-picture"
+        alt="Profile gravatar"
+        src={gravatarIMG}
+      />
+    </div>
     );
   }
 }
