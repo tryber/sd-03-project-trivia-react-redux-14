@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Timer from './Timer';
 
 function categoryAndQuestion(questionsCategory, object, idTest) {
   return (
@@ -27,6 +28,7 @@ class Questions extends Component {
             <button data-testid={`wrong-answer-${index}`}>
               {incorrectAnswer}
             </button>))[0]}
+        {questionsCategory !== undefined ? <Timer /> : null }
       </div>
     );
   }

@@ -26,6 +26,10 @@ const disabledButton = (email, name) => {
 
 const Start = (props) => {
   const { dispatchEmail, dispatchName, email, name, dispatchQuestions } = props;
+  state = { redirect: false }
+  if (this.state.redirect) {
+    return <Redirect to={'/game'} />
+  }
   return (
     <div>
       <ConfigButton />
