@@ -11,7 +11,6 @@ const nameReducer = (state = initialState, action) => {
         ...state,
         name: action.payload,
       };
-
     default:
       return state;
   }

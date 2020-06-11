@@ -1,45 +1,65 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Timer from './Timer';
 
-function categoryAndQuestion(questionsCategory, object, idTest) {
+import '../styles/questions.css';
+import updateAswer from '../redux/actions/answerAction';
+import { Redirect } from 'react-router-dom';
+
+function categoryAndQuestion(questionsCategory, object, idTest, numb) {
   return (
     <p data-testid={idTest}>
-      {questionsCategory === undefined ?
-        'carregando...' : questionsCategory.map((categoryOrQuest) => categoryOrQuest[object])[0]}
+      {questionsCategory.map((categoryOrQuest) => categoryOrQuest[object])[numb]}
     </p>
   );
 }
 
-class Questions extends Component {
-  render() {
-    const { questionsCategory } = this.props;
-    return (
-      <div className="questions">
-        {categoryAndQuestion(questionsCategory, 'category', 'question-category')}
-        {categoryAndQuestion(questionsCategory, 'question', 'question-text')}
-        <button data-testid="correct-answer">
-          {questionsCategory === undefined ? 'carregando...' : questionsCategory.map((correctAnswer) =>
-              correctAnswer.correct_answer)[0]}
-        </button>
-        {questionsCategory === undefined ? 'carregando...' : questionsCategory.map((el) =>
-          el.incorrect_answers.map((incorrectAnswer, index) =>
-            <button data-testid={`wrong-answer-${index}`}>
-              {incorrectAnswer}
-            </button>))[0]}
-        {questionsCategory !== undefined ? <Timer /> : null }
-      </div>
-    );
-  }
+const Questions = ({ questionsCategory,
+  updateQuestions,
+  questionNumber: { questionNumber, loged, answer } }) => {
+  if(!loged) return <Redirect to='/' />
+  return (
+    <div className="questions">
+      {categoryAndQuestion(questionsCategory, 'category', 'question-category', questionNumber)}
+      {categoryAndQuestion(questionsCategory, 'question', 'question-text', questionNumber)}
+      {questionsCategory.map((correctAnswer) =>
+      <button
+          className={answer ? 'correct-answer' : null}
+          data-testid="correct-answer"
+          onClick={() => updateQuestions(questionNumber)}
+          disabled={answer}
+        >
+          {correctAnswer.correct_answer}
+        </button>)[questionNumber]}
+      {questionsCategory.map((el) =>
+        el.incorrect_answers.map((incorrectAnswer, index) =>
+          <button
+            disabled={answer}
+            className={answer ? 'wrong-answer' : null}
+            data-testid={`wrong-answer-${index}`}
+            key={incorrectAnswer}
+            onClick={() => updateQuestions(questionNumber)}
+          >
+            {incorrectAnswer}
+          </button>))[questionNumber]}
+      {<Timer />}
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => ({
   questionsCategory: state.questionsReducer.questions.results,
+  questionNumber: state.questionsReducer,
 });
 
+const dispatchPropsToState = (dispatch) => ({
+  updateQuestions: () => dispatch(updateAswer())
+})
+
 Questions.propTypes = {
-  questionsCategory: PropTypes.func,
+  questionsCategory: PropTypes.arrayOf(PropTypes.string),
+  questionNumber: PropTypes.arrayOf(PropTypes.string),
 };
 
-export default connect(mapStateToProps)(Questions);
+export default connect(mapStateToProps, dispatchPropsToState)(Questions);

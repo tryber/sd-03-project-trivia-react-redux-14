@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import tokenApi from '../services/tokenApi';
@@ -8,7 +8,19 @@ import updateName from '../redux/actions/nameAction';
 import updateQuestions from '../redux/actions/questionsAction';
 import ConfigButton from './ConfigButton';
 
-const requestApi = (dispatchQuestions) => {
+const requestApi = ({ email, name, dispatchQuestions }) => {
+  const initialState = {
+    player: {
+      name,
+      assertions: 0,
+      score: 0,
+      gravatarEmail: email,
+    },
+  };
+  const stringyState = JSON.stringify(initialState);
+  localStorage.setItem('state', stringyState);
+  console.log(JSON.parse(localStorage.getItem('state')));
+
   tokenApi()
     .then(
       fetch(`https://opentdb.com/api.php?amount=5&token=${localStorage.getItem('token')}`)
@@ -25,11 +37,8 @@ const disabledButton = (email, name) => {
 };
 
 const Start = (props) => {
-  const { dispatchEmail, dispatchName, email, name, dispatchQuestions } = props;
-  state = { redirect: false }
-  if (this.state.redirect) {
-    return <Redirect to={'/game'} />
-  }
+  const { dispatchEmail, dispatchName, email, name, loged } = props;
+  if(loged) return <Redirect to='/game' />
   return (
     <div>
       <ConfigButton />
@@ -44,14 +53,12 @@ const Start = (props) => {
         id="email"
         onChange={(e) => dispatchEmail(e.target.value)} data-testid="input-gravatar-email"
       />
-      <Link to="/game">
-        <button
-          disabled={disabledButton(email, name)}
-          data-testid="btn-play"
-          onClick={() => requestApi(dispatchQuestions)}
-        >Jogar
-        </button>
-      </Link>
+      <button
+        disabled={disabledButton(email, name)}
+        data-testid="btn-play"
+        onClick={() => requestApi(props)}
+      >Jogar
+      </button>
     </div>
   );
 };
@@ -59,6 +66,7 @@ const Start = (props) => {
 const mapStateToProps = (state) => ({
   email: state.emailReducer.email,
   name: state.nameReducer.name,
+  loged: state.questionsReducer.loged,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -72,7 +80,6 @@ Start.propTypes = {
   name: PropTypes.string,
   dispatchEmail: PropTypes.func,
   dispatchName: PropTypes.func,
-  dispatchQuestions: PropTypes.func,
 };
 
 Start.defaultProps = {

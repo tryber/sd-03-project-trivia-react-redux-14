@@ -1,33 +1,54 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import rehabilitate from '../redux/actions/rehabilitateButtonAction';
+import cownDown from '../redux/actions/cowntDownAction';
+import updateAswer from '../redux/actions/answerAction';
 
-export default class Timer extends Component {
+class Timer extends Component {
   constructor(props){
     super(props)
-    this.state=({
-      timer: 3,
-    })
     this.countDown = this.countDown.bind(this);
-  }
+  };
 
   componentDidMount(){
     setInterval(this.countDown, 1000)
-  }
+  };
 
   countDown() {
-    if (this.state.timer <= 0) { 
-      clearInterval(this.timer);
+    const { rehabilitateTimer, countDowmdispatch, timer, questionNumber, updateQuestions } = this.props;
+    if (timer > 0) {
+      countDowmdispatch(timer)
     }
-    if (this.state.timer > 0) {
-      this.setState({
-      timer: this.state.timer - 1,
-    });
+    if (timer === 0) {
+      updateQuestions()
+      return new Promise( () => {
+        setTimeout( () => {
+          rehabilitateTimer(questionNumber);
+        }, 1000)
+      })
     }
-  }
+  };
+
   render() {
+    const { timer } = this.props;
     return (
       <div>
-        <p>{this.state.timer}</p>
+        <p>{timer}</p>
       </div>
     )
   }
-}
+};
+
+const mapPropToState = (state) => ({
+  timer: state.questionsReducer.timer,
+  questionNumber: state.questionsReducer.questionNumber,
+});
+
+const dispatchPropsToState = (dispatch) => ({
+  rehabilitateTimer: (questionNumber) => dispatch(rehabilitate(questionNumber)),
+  countDowmdispatch: (props) => dispatch(cownDown(props)),
+  updateQuestions: () => dispatch(updateAswer())
+});
+
+export default connect(mapPropToState, dispatchPropsToState)(Timer);
+
