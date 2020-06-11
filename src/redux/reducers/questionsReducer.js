@@ -33,9 +33,9 @@ const questionsReducer = (state = initialState, action) => {
       };
     case COUNT_DOWM:
       return {
-          ...state,
-          timer: action.payload - 1,
-        };
+        ...state,
+        timer: action.payload - 1,
+      };
     default:
       return state;
   }

@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import rehabilitate from '../redux/actions/rehabilitateButtonAction';
 import cownDown from '../redux/actions/cowntDownAction';
-import PropTypes from 'prop-types';
 import updateAswer from '../redux/actions/answerAction';
 
 class Timer extends Component {
   constructor(props) {
     super(props);
     this.countDown = this.countDown.bind(this)
-  };
+  }
 
   componentDidMount() {
     setInterval(this.countDown, 1000);
@@ -17,7 +17,7 @@ class Timer extends Component {
 
   countDown() {
     const {
-      rehabilitateTimer, countDowmdispatch, timer, questionNumber, updateQuestions
+      rehabilitateTimer, countDowmdispatch, timer, questionNumber, updateQuestions,
     } = this.props;
     if (timer > 0) {
       countDowmdispatch(timer);
@@ -30,7 +30,7 @@ class Timer extends Component {
         }, 1000);
       });
     }
-    return true
+    return true;
   }
 
   render() {
@@ -39,7 +39,7 @@ class Timer extends Component {
       <div>
         <p>{timer}</p>
       </div>
-    )
+    );
   }
 }
 

@@ -18,35 +18,35 @@ function categoryAndQuestion(questionsCategory, object, idTest, numb) {
 const Questions = ({ questionsCategory,
   updateQuestions,
   questionNumber: { questionNumber, loged, answer } }) => {
-  if (!loged) return <Redirect to='/' />;
+  if (!loged) return <Redirect to="/" />;
   return (
     <div className="questions">
-      {categoryAndQuestion(questionsCategory, 'category', 'question-category', questionNumber)}
-      {categoryAndQuestion(questionsCategory, 'question', 'question-text', questionNumber)}
+      {categoryAndQuestion(questionsCategory, "category", "question-category", questionNumber)}
+      {categoryAndQuestion(questionsCategory, "question", "question-text", questionNumber)}
       {questionsCategory.map((correctAnswer) =>
         <button
-        className={answer ? 'correct-answer' : null}
-        data-testid="correct-answer"
-        onClick={() => updateQuestions(questionNumber)}
-        disabled={answer}
+          className={answer ? "correct-answer" : null}
+          data-testid="correct-answer"
+          onClick={() => updateQuestions(questionNumber)}
+          disabled={answer}
         >
         {correctAnswer.correct_answer}
         </button>)[questionNumber]}
       {questionsCategory.map((el) =>
         el.incorrect_answers.map((incorrectAnswer, index) =>
           <button
-          disabled={answer}
-          className={answer ? 'wrong-answer' : null}
-          data-testid={`wrong-answer-${index}`}
-          key={incorrectAnswer}
-          onClick={() => updateQuestions(questionNumber)}
+            disabled={answer}
+            className={answer ? "wrong-answer" : null}
+            data-testid={`wrong-answer-${index}`}
+            key={incorrectAnswer}
+            onClick={() => updateQuestions(questionNumber)}
           >
             {incorrectAnswer}
           </button>))[questionNumber]}
       {<Timer />}
     </div>
   );
-}
+};
 
 const mapStateToProps = (state) => ({
   questionsCategory: state.questionsReducer.questions.results,
