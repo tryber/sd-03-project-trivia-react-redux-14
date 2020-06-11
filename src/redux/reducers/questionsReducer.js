@@ -3,11 +3,10 @@ export const ANSWER_REDUCER = 'ANSWER_REDUCER';
 export const REHABILITATE_BUTTON = 'REHABILITATE_BUTTON';
 export const COUNT_DOWM = 'COUNT_DOWM';
 
-
 const initialState = {
   loged: false,
   answer: false,
-  timer:30,
+  timer: 30,
   questionNumber: 0,
   questions: [],
 };
@@ -33,10 +32,10 @@ const questionsReducer = (state = initialState, action) => {
         questionNumber: action.payload + 1,
       };
     case COUNT_DOWM:
-        return ({
+      return {
           ...state,
           timer: action.payload - 1,
-        });
+        };
     default:
       return state;
   }

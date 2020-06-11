@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import tokenApi from '../services/tokenApi';
@@ -38,7 +38,7 @@ const disabledButton = (email, name) => {
 
 const Start = (props) => {
   const { dispatchEmail, dispatchName, email, name, loged } = props;
-  if(loged) return <Redirect to='/game' />
+  if (loged) return <Redirect to='/game' />;
   return (
     <div>
       <ConfigButton />
@@ -76,6 +76,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Start.propTypes = {
+  loged: PropTypes.string,
   email: PropTypes.string,
   name: PropTypes.string,
   dispatchEmail: PropTypes.func,
@@ -83,6 +84,7 @@ Start.propTypes = {
 };
 
 Start.defaultProps = {
+  loged: '',
   email: '',
   name: '',
   dispatchEmail: '',
