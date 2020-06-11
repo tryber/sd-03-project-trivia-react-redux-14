@@ -21,11 +21,11 @@ const Questions = ({ questionsCategory,
   if (!loged) return <Redirect to="/" />;
   return (
     <div className="questions">
-      {categoryAndQuestion(questionsCategory, "category", "question-category", questionNumber)}
-      {categoryAndQuestion(questionsCategory, "question", "question-text", questionNumber)}
+      {categoryAndQuestion(questionsCategory, 'category', 'question-category', questionNumber)}
+      {categoryAndQuestion(questionsCategory, 'question', 'question-text', questionNumber)}
       {questionsCategory.map((correctAnswer) =>
         <button
-          className={answer ? "correct-answer" : null}
+          className={answer ? 'correct-answer' : null}
           data-testid="correct-answer"
           onClick={() => updateQuestions(questionNumber)}
           disabled={answer}
@@ -36,7 +36,7 @@ const Questions = ({ questionsCategory,
         el.incorrect_answers.map((incorrectAnswer, index) =>
           <button
             disabled={answer}
-            className={answer ? "wrong-answer" : null}
+            className={answer ? 'wrong-answer' : null}
             data-testid={`wrong-answer-${index}`}
             key={incorrectAnswer}
             onClick={() => updateQuestions(questionNumber)}

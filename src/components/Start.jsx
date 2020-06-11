@@ -38,7 +38,7 @@ const disabledButton = (email, name) => {
 
 const Start = (props) => {
   const { dispatchEmail, dispatchName, email, name, loged } = props;
-  if (loged) return <Redirect to='/game' />;
+  if (loged) return <Redirect to="/game" />;
   return (
     <div>
       <ConfigButton />

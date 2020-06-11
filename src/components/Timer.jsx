@@ -8,7 +8,7 @@ import updateAswer from '../redux/actions/answerAction';
 class Timer extends Component {
   constructor(props) {
     super(props);
-    this.countDown = this.countDown.bind(this)
+    this.countDown = this.countDown.bind(this);
   }
 
   componentDidMount() {
