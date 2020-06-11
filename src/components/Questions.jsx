@@ -30,7 +30,7 @@ const Questions = ({ questionsCategory,
           onClick={() => updateQuestions(questionNumber)}
           disabled={answer}
         >
-        {correctAnswer.correct_answer}
+          {correctAnswer.correct_answer}
         </button>)[questionNumber]}
       {questionsCategory.map((el) =>
         el.incorrect_answers.map((incorrectAnswer, index) =>
