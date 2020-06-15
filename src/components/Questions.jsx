@@ -15,9 +15,25 @@ function categoryAndQuestion(questionsCategory, object, idTest, numb) {
   );
 }
 
+const updateScore = (score, prop, updateQuestions) => {
+  const oldScore = JSON.parse(localStorage.getItem('state'));
+  oldScore.player.score += score;
+  oldScore.player.assertions += prop;
+  const updatedScore = JSON.stringify(oldScore);
+  localStorage.setItem('state', updatedScore);
+  updateQuestions();
+};
+
 const Questions = ({ questionsCategory,
   updateQuestions,
-  questionNumber: { questionNumber, loged, answer } }) => {
+  questionNumber: { questionNumber, loged, answer, timer } }) => {
+  const difficultyValue = questionsCategory[questionNumber].difficulty;
+  let resultValue = 1;
+  if (difficultyValue === 'hard') {
+    resultValue = 3;
+  } else if (difficultyValue === 'medium') {
+    resultValue = 2;
+  }
   if (!loged) return <Redirect to="/" />;
   return (
     <div className="questions">
@@ -27,7 +43,7 @@ const Questions = ({ questionsCategory,
         <button
           className={answer ? 'correct-answer' : null}
           data-testid="correct-answer"
-          onClick={() => updateQuestions(questionNumber)}
+          onClick={() => updateScore(10 + (timer * resultValue), 1, updateQuestions)}
           disabled={answer}
         >
           {correctAnswer.correct_answer}
@@ -39,7 +55,7 @@ const Questions = ({ questionsCategory,
             className={answer ? 'wrong-answer' : null}
             data-testid={`wrong-answer-${index}`}
             key={incorrectAnswer}
-            onClick={() => updateQuestions(questionNumber)}
+            onClick={() => updateScore(0, 0, updateQuestions)}
           >
             {incorrectAnswer}
           </button>))[questionNumber]}
@@ -54,7 +70,7 @@ const mapStateToProps = (state) => ({
 });
 
 const dispatchPropsToState = (dispatch) => ({
-  updateQuestions: () => dispatch(updateAswer()),
+  updateQuestions: (e) => dispatch(updateAswer(e)),
 });
 
 Questions.propTypes = {
