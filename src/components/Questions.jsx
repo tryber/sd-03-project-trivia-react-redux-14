@@ -27,7 +27,7 @@ const updateScore = (score, prop, updateQuestions) => {
 const Questions = ({ questionsCategory,
   updateQuestions,
   questionNumber: { questionNumber, loged, answer, timer } }) => {
-  const difficultyValue = questionsCategory[questionNumber].difficulty;
+  const difficultyValue = questionNumber < 5 && questionsCategory[questionNumber].difficulty;
   let resultValue = 1;
   if (difficultyValue === 'hard') {
     resultValue = 3;
@@ -59,7 +59,7 @@ const Questions = ({ questionsCategory,
           >
             {incorrectAnswer}
           </button>))[questionNumber]}
-      {<Timer />}
+      {questionNumber < 5 && <Timer />}
     </div>
   );
 };
