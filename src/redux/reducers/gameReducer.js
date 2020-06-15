@@ -20,7 +20,7 @@ const gameReducer = (state = INITIAL_STATE, action) => {
         ...state,
         questionID: action.payload + 1,
       };
-      default:
+    default:
       return state;
   }
 };

@@ -75,7 +75,7 @@ class Questions extends React.Component {
     }
     return (
       <div className="GameContainer">
-        {this.renderQuestion( questions.results, questionID )}
+        {this.renderQuestion(questions.results, questionID)}
         {this.renderNextButton(questionID)}
       </div>
     );
@@ -94,6 +94,5 @@ const mapDispatchToProps = (dispatch) => ({
   loadQuestions: () => dispatch(fetchQuestions()),
   nextQuestion: (e) => dispatch(nextButton(e)),
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Questions);
