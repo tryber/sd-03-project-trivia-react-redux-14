@@ -2,7 +2,7 @@ import React from 'react';
 
 const Settings = () => (
   <div>
-      Settings
+    Settings
   </div>
 );
 
