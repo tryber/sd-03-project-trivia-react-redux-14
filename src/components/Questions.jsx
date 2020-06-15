@@ -27,6 +27,7 @@ const updateScore = (score, prop, updateQuestions) => {
 const Questions = ({ questionsCategory,
   updateQuestions,
   questionNumber: { questionNumber, loged, answer, timer } }) => {
+  if (!loged) return <Redirect to="/" />;
   const difficultyValue = questionNumber < 5 && questionsCategory[questionNumber].difficulty;
   let resultValue = 1;
   if (difficultyValue === 'hard') {
@@ -34,7 +35,6 @@ const Questions = ({ questionsCategory,
   } else if (difficultyValue === 'medium') {
     resultValue = 2;
   }
-  if (!loged) return <Redirect to="/" />;
   return (
     <div className="questions">
       {categoryAndQuestion(questionsCategory, 'category', 'question-category', questionNumber)}
