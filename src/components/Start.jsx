@@ -25,7 +25,7 @@ const requestApi = ({ email, name, dispatchQuestions }) => {
     .then(
       fetch(`https://opentdb.com/api.php?amount=5&token=${localStorage.getItem('token')}`)
         .then((response) => response.json())
-        .then((data) => dispatchQuestions(data)),
+        .then((data) => data.ok ? Promise.resolve(dispatchQuestions(data)) : Promise.reject(dispatchQuestions(data)) ),
     );
 };
 
