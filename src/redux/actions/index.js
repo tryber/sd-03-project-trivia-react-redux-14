@@ -21,9 +21,9 @@ export const requestData = () => ({
 
 export const fetchQuestions = () => (dispatch) => {
   const token = localStorage.token;
-  const url = `https://opentdb.com/api.php?amount=5&token=${token}`
+  const url = `https://opentdb.com/api.php?amount=5&token=${token}`;
   dispatch(requestData());
   fetch(url)
     .then((data) => data.json())
-    .then((payload) => dispatch(updateQuestions(payload)))
+    .then((payload) => dispatch(updateQuestions(payload)));
 };

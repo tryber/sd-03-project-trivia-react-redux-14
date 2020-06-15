@@ -21,7 +21,7 @@ const gameReducer = (state = INITIAL_STATE, action) => {
         questionID: action.payload + 1,
       };
       default:
-        return state;
+      return state;
   }
 };
 

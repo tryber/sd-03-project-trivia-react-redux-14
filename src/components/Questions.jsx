@@ -47,7 +47,7 @@ class Questions extends React.Component {
     const question = questions[questionID];
     return (
       <div>
-        <div className="GameContainer"> 
+        <div className="GameContainer">
           <p className="question-category">{question.category}</p>
           <p className="question-text">{question.question}</p>
         </div>
@@ -71,11 +71,11 @@ class Questions extends React.Component {
   render() {
     const { questions, questionID } = this.props;
     if (!questions.results) {
-      return <h3 className="GameContainer">Loading...</h3>
+      return <h3 className="GameContainer">Loading...</h3>;
     }
     return (
       <div className="GameContainer">
-        {this.renderQuestion(questions.results, questionID )}
+        {this.renderQuestion( questions.results, questionID )}
         {this.renderNextButton(questionID)}
       </div>
     );
@@ -91,9 +91,8 @@ const mapStateToProps = ({
 );
 
 const mapDispatchToProps = (dispatch) => ({
-  updateQuestions: () => dispatch(updateAswer()),
   loadQuestions: () => dispatch(fetchQuestions()),
-  nextQuestion: (value) => dispatch(nextButton(value)),
+  nextQuestion: (e) => dispatch(nextButton(e)),
 });
 
 

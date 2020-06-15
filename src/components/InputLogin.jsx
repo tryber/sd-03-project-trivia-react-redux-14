@@ -2,13 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { 
-  updateInput,
-  updateQuestions,
-} from '../redux/actions/index';
+import { updateInput } from '../redux/actions/index';
 import tokenAPI from '../services/requestToken';
 
-const tokenState = (name, email, dispatchQuestions) => {
+const tokenState = (name, email) => {
   const initialState = {
     player: {
       name,
@@ -20,7 +17,7 @@ const tokenState = (name, email, dispatchQuestions) => {
   const stringyState = JSON.stringify(initialState);
   localStorage.setItem('state', stringyState);
   // console.log(JSON.parse(localStorage.getItem('state')));
-  tokenAPI()
+  tokenAPI();
 };
 
 
@@ -36,7 +33,7 @@ const disableButton = (name, email) => {
   return true;
 };
 
-const InputLogin = ({ name, email, dispatchInput, dispatchQuestions }) => (
+const InputLogin = ({ name, email, dispatchInput }) => (
   <div>
     <label htmlFor="name">Email do Jogador:</label>
     <input
@@ -62,7 +59,7 @@ const InputLogin = ({ name, email, dispatchInput, dispatchQuestions }) => (
       <button
         disabled={disableButton(name, email)}
         data-testid="btn-play"
-        onClick={() => tokenState(name, email, dispatchQuestions)}
+        onClick={() => tokenState(name, email)}
       >
       Jogar!
     </button>
@@ -72,15 +69,13 @@ const InputLogin = ({ name, email, dispatchInput, dispatchQuestions }) => (
 
 const mapStateToProps = ({
   dispatchInput,
-  dispatchQuestions,
   inputReducer: { name, email },
 }) => (
-    { name, email, dispatchInput, dispatchQuestions }
+    { name, email, dispatchInput }
 );
 
 const mapDispatchToProps = (dispatch) => ({
   dispatchInput: (value, name) => dispatch(updateInput(value, name)),
-  dispatchQuestions: (e) => dispatch(updateQuestions(e)),
 });
 
 InputLogin.propTypes = {
@@ -90,5 +85,3 @@ InputLogin.propTypes = {
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(InputLogin);
-
-

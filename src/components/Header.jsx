@@ -11,8 +11,8 @@ export class Header extends Component {
     const gravatarIMG = `https://www.gravatar.com/avatar/${hash.toString()
       .toLowerCase()}.jpg`;
     return (
-      <div className = "GameHeader">
-        <div className = "PlayerHeader">
+      <div className="GameHeader">
+        <div className="PlayerHeader">
           <img
             data-testid="header-profile-picture"
             alt="Profile gravatar"
@@ -22,14 +22,14 @@ export class Header extends Component {
           <p data-testid="header-score">0</p>
         </div>
         <div>
-        <ConfigButton />
+          <ConfigButton />
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({inputReducer: { name, email } }) => ({ name, email });
+const mapStateToProps = ({ inputReducer: { name, email } }) => ({ name, email });
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,
