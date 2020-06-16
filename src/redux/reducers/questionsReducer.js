@@ -6,7 +6,7 @@ export const COUNT_DOWM = 'COUNT_DOWM';
 const initialState = {
   loged: false,
   answer: false,
-  timer: 2,
+  timer: 30,
   questionNumber: 0,
   questions: [],
 };
@@ -28,7 +28,7 @@ const questionsReducer = (state = initialState, action) => {
       return {
         ...state,
         answer: false,
-        timer: 2,
+        timer: 30,
         questionNumber: action.payload + 1,
       };
     case COUNT_DOWM:
