@@ -1,14 +1,21 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import rehabilitate from '../redux/actions/rehabilitateButtonAction';
 
-const NextQuestionButton = ({ rehabilitateTimer, questionNumber }) => 
-  <button data-testid="btn-next" onClick={() => {
-    if (questionNumber >= 4) return location.assign('/feedback');
-    rehabilitateTimer(questionNumber)}}>
-    Próxima
-  </button>;
+class NextQuestionButton extends Component {
+  render() {
+    const { questionNumber, rehabilitateTimer } =this.props;
+    return (
+      <button data-testid="btn-next" onClick={() => {
+        if(questionNumber>=4) return location.assign("/feedback")
+        rehabilitateTimer(questionNumber)}}>
+        Próxima
+      </button>
+    );
+  }
+}
+
 
 const mapPropToState = (state) => ({
   questionNumber: state.questionsReducer.questionNumber,
