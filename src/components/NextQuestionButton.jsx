@@ -21,7 +21,7 @@ class NextQuestionButton extends Component {
                 picture: MD5(teste.player.gravatarEmail).toString(),
               },
             ];
-            if(updatedScore !== null) updatedScore.map(el => newArray.push(el));
+            if (updatedScore !== null) updatedScore.map((el) => newArray.push(el));
             localStorage.setItem('ranking', JSON.stringify(newArray));
             return location.assign('/feedback');
           }
