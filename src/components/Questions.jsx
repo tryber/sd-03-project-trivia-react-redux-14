@@ -6,6 +6,7 @@ import Timer from './Timer';
 
 import '../styles/questions.css';
 import updateAswer from '../redux/actions/answerAction';
+import NextQuestionButton from './NextQuestionButton';
 
 function categoryAndQuestion(questionsCategory, object, idTest, numb) {
   return (
@@ -59,6 +60,7 @@ const Questions = ({ questionsCategory,
           >
             {incorrectAnswer}
           </button>))[questionNumber]}
+      {answer && <NextQuestionButton />}
       {questionNumber < 5 && <Timer />}
     </div>
   );

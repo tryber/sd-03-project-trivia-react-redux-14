@@ -6,6 +6,7 @@ import Home from './pages/Home';
 import GamePage from './pages/GamePage';
 
 import './App.css';
+import Feedback from './pages/Feedback';
 
 export default function App() {
   return (
@@ -25,6 +26,11 @@ export default function App() {
           exact
           path="/game"
           component={GamePage}
+        />
+        <Route
+          exact
+          path="/feedback"
+          component={Feedback}
         />
       </Switch>
     </BrowserRouter>
