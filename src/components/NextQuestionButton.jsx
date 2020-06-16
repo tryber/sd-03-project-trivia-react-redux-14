@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import MD5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import rehabilitate from '../redux/actions/rehabilitateButtonAction';
 
@@ -10,7 +11,19 @@ class NextQuestionButton extends Component {
       <button
         data-testid="btn-next"
         onClick={() => {
-          if (questionNumber >= 4) return location.assign('/feedback');
+          if (questionNumber >= 1) {
+          const updatedScore = JSON.parse(localStorage.getItem('ranking'));
+          const teste = JSON.parse(localStorage.getItem('state'));
+          const newArray = [
+            {
+              name: teste.player.name,
+              score: teste.player.score, picture: MD5(teste.player.gravatarEmail).toString(),
+            }
+          ]
+          if(updatedScore!== null) updatedScore.map(el=>newArray.push(el))
+          localStorage.setItem('ranking', JSON.stringify(newArray));
+          return location.assign('/feedback')
+          } ;
           return rehabilitateTimer(questionNumber);
         }}
       >
