@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 
 export class Header extends Component {
   render() {
-    const oldScore = JSON.parse(localStorage.getItem('state'))
+    const oldScore = JSON.parse(localStorage.getItem('state'));
     const hash = MD5(oldScore.player.gravatarEmail);
     const gravatarIMG = `https://www.gravatar.com/avatar/${hash.toString()
       .toLowerCase()}.jpg`;
