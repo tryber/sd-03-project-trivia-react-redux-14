@@ -3,11 +3,9 @@ import { Link } from 'react-router-dom';
 
 function ConfigButton() {
   return (
-    <div>
-      <Link to="/settings">
-        <button data-testid="btn-settings">Config.</button>
-      </Link>
-    </div>
+    <Link to="/settings">
+      <button className="ButtonConfig" data-testid="btn-settings">Configuraçẽos</button>
+    </Link>
   );
 }
 

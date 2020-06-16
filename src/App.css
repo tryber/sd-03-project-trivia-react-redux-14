@@ -1,78 +1,175 @@
 .App {
+  align-items: center;
+  background-color: rgb(15, 163, 107);
+  color: white;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
   text-align: center;
 }
 
 .App-logo {
-  height: 30vmin;
+  height: 20vmin;
   pointer-events: none;
   position: relative;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: shake infinite 1.52s cubic-bezier(.36,.17,.19,.97) both;
-  }
-}
+@media ( prefers-reduced-motion : no-preference ) {
 
-.App-header {
-  background-color: rgb(15, 163, 107);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  .App-logo {
+    animation : shake infinite 2.52s cubic-bezier(0.36, 0.17, 0.19, 0.97) both;
+  }
 }
 
 @keyframes shake {
+
   10%, 90% {
-    transform: translate3d(-1px, 0, 0);
+    transform: translate3d(-3px, 0, 0);
   }
 
   20%, 80% {
-    transform: translate3d(3px, 0, 0);
+    transform: translate3d(5px, 0, 0);
   }
 
   30%, 50%, 70% {
-    transform: translate3d(-5px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
   }
 
   40%, 60% {
-    transform: translate3d(5px, 0, 0);
+    transform: translate3d(10px, 0, 0);
   }
 }
 
-/*                        EDITIONS                        */ 
+.correct-answer {
+  border: 3px solid rgb(6, 240, 15);
+}
 
-input {
-  width: 200px;
-  height: 20px;
+.wrong-answer {
+  border: 3px solid red;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  background-color: black;
+  border: black;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  height: 30px;
+  margin: 15px;
+  width: 175px;
+}
+
+.show:hover {
+  background-color: seagreen;
+}
+/* ----------------  Game  -------------- */
+
+.Game {
+  display:flex;
+  justify-content: center;
+}
+
+.GameContainer {
+  display: flex;
+  flex-direction: column;
+  font-size: 22px;
+  justify-content: center;
+  max-width: 800px;
+  text-align: center;
+}
+
+button {
   font-size: 16px;
 }
 
+.Centralize {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 50px;
+}
 
-/* HEADER */
+.CentralizeW {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+/* ----------------  BUTTONS -------------- */
+
+.ButtonConfig {
+  background-color: black;
+  border: black;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  height: 30px;
+  margin: 15px;
+}
+
+.ButtonConfig:hover {
+  background-color: seagreen;
+}
+
+.ButtonJogar {
+  background-color: black;
+  border: black;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  height: 30px;
+  margin: 15px;
+}
+
+.ButtonJogar:hover {
+  background-color: seagreen;
+}
+/* ----------------  HEADER -------------- */
 
 .GameHeader {
+  background-color: #20c997;
+  border-bottom: 2px solid #20a57d;
+  color: white;
   display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  font-weight: 500;
+  height: 90px;
   justify-content: space-around;
 }
 
 .PlayerHeader {
-  display: flex;
-}
-
-/* Questoes */
-
-.GameContainer {
   align-items: center;
   display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 
-.Questions {
+.Avatar {
+  border: inset 5px #59ccaa;
+  border-radius: 50%;
+}
+/* ---------------- LOGIN -------------- */
+
+input {
+  border-radius: 15px;
+  height: 25px;
+}
+
+label {
+  font-size: 26px;
+  font-weight: 500;
+  text-shadow: 2px 2px #183111;
+}
+
+.FlexInput {
   display: flex;
+  flex-direction: column;
   justify-content: center;
 }

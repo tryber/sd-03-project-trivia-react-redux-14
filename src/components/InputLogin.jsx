@@ -35,35 +35,38 @@ const disableButton = (name, email) => {
 
 const InputLogin = ({ name, email, dispatchInput }) => (
   <div>
-    <label htmlFor="name">Email do Jogador:</label>
-    <input
-      value={email || ''}
-      id="email"
-      placeholder="Email do Gravatar:"
-      onChange={(e) => handleChange(e, dispatchInput)}
-      name="email"
-      type="text"
-      data-testid="input-gravatar-email"
-    />
-    <label htmlFor="name">Nome do Jogador:</label>
-    <input
-      value={name || ''}
-      id="name"
-      placeholder="Nome do Jogador:"
-      onChange={(e) => handleChange(e, dispatchInput)}
-      name="name"
-      type="text"
-      data-testid="input-player-name"
-    />
-    <Link to="/game">
-      <button
-        disabled={disableButton(name, email)}
-        data-testid="btn-play"
-        onClick={() => tokenState(name, email)}
-      >
-      Jogar!
-    </button>
-    </Link>
+    <div className="FlexInput">
+      <label htmlFor="name">Nome do Jogador:</label>
+      <input
+        value={name || ''}
+        id="name"
+        onChange={(e) => handleChange(e, dispatchInput)}
+        name="name"
+        type="text"
+        data-testid="input-player-name"
+      />
+      <label htmlFor="name">Email do Jogador:</label>
+      <input
+        value={email || ''}
+        id="email"
+        onChange={(e) => handleChange(e, dispatchInput)}
+        name="email"
+        type="text"
+        data-testid="input-gravatar-email"
+      />
+    </div>
+    <div>
+      <Link to="/game">
+        <button
+          className="ButtonJogar"
+          disabled={disableButton(name, email)}
+          data-testid="btn-play"
+          onClick={() => tokenState(name, email)}
+        >
+          Jogar!
+        </button>
+      </Link>
+    </div>
   </div>
 );
 

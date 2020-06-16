@@ -6,9 +6,9 @@ import ConfigButton from '../components/Config/configButton';
 
 const Home = () => (
   <div className="App">
-    <div className="App-header">
+    <div>
       <img src={logo} className="App-logo" alt="logo" />
-      <ConfigButton />
+      <ConfigButton /> 
       <InputLogin />
     </div>
   </div>

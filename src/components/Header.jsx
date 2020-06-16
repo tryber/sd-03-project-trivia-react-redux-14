@@ -6,22 +6,24 @@ import ConfigButton from './Config/configButton';
 
 export class Header extends Component {
   render() {
-    const { name, email } = this.props;
+    const { name, email, score } = this.props;
     const hash = MD5(email);
     const gravatarIMG = `https://www.gravatar.com/avatar/${hash.toString()
       .toLowerCase()}.jpg`;
+
     return (
       <div className="GameHeader">
         <div className="PlayerHeader">
           <img
+            className="Avatar"
             data-testid="header-profile-picture"
             alt="Profile gravatar"
             src={gravatarIMG}
           />
-          <p data-testid="header-player-name">{name}</p>
-          <p data-testid="header-score">0</p>
+          <p data-testid="header-player-name">Jogador: {name}</p>
         </div>
-        <div>
+        <div className="PlayerHeader">
+          <p data-testid="header-score">Pontos: {score}</p>
           <ConfigButton />
         </div>
       </div>
@@ -29,7 +31,10 @@ export class Header extends Component {
   }
 }
 
-const mapStateToProps = ({ inputReducer: { name, email } }) => ({ name, email });
+const mapStateToProps = ({
+  inputReducer: { name, email },
+  gameReducer: { score },
+}) => ({ name, email, score });
 
 Header.propTypes = {
   email: PropTypes.string.isRequired,

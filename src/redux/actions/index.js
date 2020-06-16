@@ -10,10 +10,9 @@ export const updateQuestions = (payload) => ({
 });
 
 export const nextButton = (payload) => ({
-  type: 'NEXT_BUTTON',
+  type: 'NEXT_QUESTION',
   payload,
 });
-
 
 export const requestData = () => ({
   type: 'REQUEST_QUESTIONS',
@@ -27,3 +26,22 @@ export const fetchQuestions = () => (dispatch) => {
     .then((data) => data.json())
     .then((payload) => dispatch(updateQuestions(payload)));
 };
+
+export const rightAnswer = (payload) => ({
+  type: 'RIGHT_CHOICE',
+  payload,
+});
+
+export const wrongAnswer = () => ({
+  type: 'WRONG_CHOICE',
+});
+
+export const timerDown = (payload) => ({
+  type: 'TIMER_DOWN',
+  payload,
+});
+
+export const scoreToStore = (payload) => ({
+  type: 'SCORE_STORE',
+  payload,
+});
