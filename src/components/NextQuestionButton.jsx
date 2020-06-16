@@ -9,10 +9,7 @@ class NextQuestionButton extends Component {
     return (
       <button
         data-testid="btn-next"
-        onClick={() => {
-          if (questionNumber >= 4) return location.assign('/feedback');
-          return rehabilitateTimer(questionNumber);
-        }}
+        onClick={() =>  rehabilitateTimer(questionNumber)}
       >
           Próxima
       </button>
