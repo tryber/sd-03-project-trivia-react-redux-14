@@ -5,14 +5,14 @@ import PropTypes from 'prop-types';
 
 export class Header extends Component {
   render() {
-    const oldScore = JSON.parse(localStorage.getItem('state'));
-    const hash = MD5(oldScore.player.gravatarEmail);
+    const playerInfos = JSON.parse(localStorage.getItem('state'));
+    const hash = MD5(playerInfos.player.gravatarEmail);
     const gravatarIMG = `https://www.gravatar.com/avatar/${hash.toString()
       .toLowerCase()}.jpg`;
     return (
       <div>
-        <p data-testid="header-score">{oldScore.player.score}</p>
-        <p data-testid="header-player-name">{oldScore.player.name}</p>
+        <p data-testid="header-score">{playerInfos.player.score}</p>
+        <p data-testid="header-player-name">{playerInfos.player.name}</p>
         <img
           data-testid="header-profile-picture"
           alt="Profile gravatar"
