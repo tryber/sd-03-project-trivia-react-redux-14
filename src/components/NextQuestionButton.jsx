@@ -5,15 +5,15 @@ import rehabilitate from '../redux/actions/rehabilitateButtonAction';
 
 class NextQuestionButton extends Component {
   render() {
-    const { questionNumber, rehabilitateTimer } =this.props;
+    const { questionNumber, rehabilitateTimer } = this.props;
     return (
       <button
-      data-testid="btn-next"
-      onClick={() => {
-          if(questionNumber >= 4) return location.assign('/feedback')
-          return rehabilitateTimer(questionNumber)
-        }}>
-        Próxima
+        data-testid="btn-next"
+        onClick={() => {
+            if(questionNumber >= 4) return location.assign('/feedback')
+            return rehabilitateTimer(questionNumber)
+          }}>
+          Próxima
       </button>
     );
   }
