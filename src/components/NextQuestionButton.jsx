@@ -13,7 +13,7 @@ class NextQuestionButton extends Component {
           if (questionNumber >= 4) return location.assign('/feedback');
           return rehabilitateTimer(questionNumber);
         }}
-        >
+      >
           Próxima
       </button>
     );
