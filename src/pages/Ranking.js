@@ -8,8 +8,8 @@ export default class Ranking extends Component {
       const bandA = a.score;
       const bandB = b.score;
       let comparison = 0;
-      if (bandA < bandB) return comparison = 1;
-      if (bandA > bandB) return comparison = -1;
+      if (bandA < bandB) return (comparison = 1);
+      if (bandA > bandB) return (comparison = -1);
       return comparison;
     }
     const sort = socoreRanking.sort(compare);
