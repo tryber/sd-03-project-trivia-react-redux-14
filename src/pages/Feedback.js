@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import FeedbackMessage from '../components/FeedbackMessage';
+import FinalResultFeedback from '../components/FinalResultFeedback';
 
 export default class Feedback extends Component {
   render() {
@@ -9,6 +10,7 @@ export default class Feedback extends Component {
       <div>
         <Header />
         <FeedbackMessage />
+        <FinalResultFeedback />
         <Link to="/">
           <button data-testid="btn-play-again">
             Jogar novamente
