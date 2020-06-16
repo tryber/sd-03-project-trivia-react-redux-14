@@ -9,10 +9,10 @@ export default class Ranking extends Component {
       const bandB = b.score;
       let comparison = 0;
       if (bandA < bandB) {
-        return comparison = 1
+        return comparison == 1;
       }
       if (bandA > bandB) {
-        return comparison = -1
+        return comparison == -1;
       }
       return comparison;
     }
