@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Header } from '../components/Header';
 import FeedbackMessage from '../components/FeedbackMessage';
-import { Link } from 'react-router-dom';
 
 export default class Feedback extends Component {
   render() {
@@ -16,7 +16,7 @@ export default class Feedback extends Component {
         </Link>
         <Link to="/ranking">
           <button data-testid="btn-ranking">
-            "Ver Ranking"
+            Ver Ranking
           </button>
         </Link>
       </div>
