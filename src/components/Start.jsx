@@ -19,14 +19,8 @@ const requestApi = ({ email, name, dispatchQuestions }) => {
   };
   const stringyState = JSON.stringify(initialState);
   localStorage.setItem('state', stringyState);
-  console.log(JSON.parse(localStorage.getItem('state')));
 
-  tokenApi()
-    .then(
-      fetch(`https://opentdb.com/api.php?amount=5&token=${localStorage.getItem('token')}`)
-        .then((response) => response.json())
-        .then((data) => data.ok ? Promise.resolve(dispatchQuestions(data)) : Promise.reject(dispatchQuestions(data)) ),
-    );
+  tokenApi(dispatchQuestions)
 };
 
 const disabledButton = (email, name) => {
@@ -37,8 +31,8 @@ const disabledButton = (email, name) => {
 };
 
 const Start = (props) => {
-  const { dispatchEmail, dispatchName, email, name, loged } = props;
-  if (loged) return <Redirect to="/game" />;
+  const { dispatchEmail, dispatchName, email, name, loged, questionsCategory } = props;
+  if (loged && questionsCategory.length>0) return <Redirect to="/game" />;
   return (
     <div>
       <ConfigButton />
@@ -64,6 +58,7 @@ const Start = (props) => {
 };
 
 const mapStateToProps = (state) => ({
+  questionsCategory: state.questionsReducer.questions.results,
   email: state.emailReducer.email,
   name: state.nameReducer.name,
   loged: state.questionsReducer.loged,
