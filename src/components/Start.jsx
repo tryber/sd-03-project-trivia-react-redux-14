@@ -20,10 +20,10 @@ const requestApi = async ({ email, name, dispatchQuestions }) => {
   const stringyState = JSON.stringify(initialState);
   localStorage.setItem('state', stringyState);
 
-  await tokenApi(dispatchQuestions)
+  await tokenApi(dispatchQuestions);
   await fetch(`https://opentdb.com/api.php?amount=5&token=${localStorage.getItem('token')}`)
   .then((response) => response.json())
-  .then((data) => dispatchQuestions(data))
+  .then((data) => dispatchQuestions(data));
 };
 
 const disabledButton = (email, name) => {
