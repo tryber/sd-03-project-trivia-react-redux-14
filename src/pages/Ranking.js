@@ -10,10 +10,10 @@ export default class Ranking extends Component {
       let comparison = 0;
       if (bandA < bandB) {
         return comparison = 1
-      };
+      }
       if (bandA > bandB) {
         return comparison = -1
-      };
+      }
       return comparison;
     }
     const sort = socoreRanking.sort(compare);
@@ -30,11 +30,7 @@ export default class Ranking extends Component {
               src={`https://www.gravatar.com/avatar/${el.picture.toLowerCase()}.jpg`}
             />
           </p>)}
-        <Link to="/" data-testid="btn-go-home">
-          <button>
-            Página inicial
-          </button>
-        </Link>
+        <Link to="/" data-testid="btn-go-home"><button>Página inicial</button></Link>
       </div>
     );
   }
