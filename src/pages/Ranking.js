@@ -6,7 +6,7 @@ export default class Ranking extends Component {
     return (
       <div>
         <p data-testid="ranking-title">Raking</p>
-        <Link to='/' data-testid="btn-go-home">
+        <Link to="/" data-testid="btn-go-home">
           <button>
             Página inicial
           </button>
