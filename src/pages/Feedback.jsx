@@ -6,6 +6,7 @@ import Header from '../components/Header';
 
 class Feedback extends Component {
   renderFeedBack() {
+    const { assertions, score } = this.props;
     return (
       <div>
         <Header />
@@ -30,7 +31,7 @@ class Feedback extends Component {
   render() {
     const { assertions, score } = this.props;
     if (assertions < 3) {
-      return renderFeedBack();
+      return this.renderFeedBack();
     }
     return (
       <div>
