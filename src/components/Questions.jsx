@@ -5,6 +5,10 @@ import { fetchQuestions, nextButton, rightAnswer, wrongAnswer, scoreToStore } fr
 import Timer from './Config/configTimer';
 
 class Questions extends React.Component {
+  componentDidMount() {
+    this.props.loadQuestions();
+  }
+
   static shuffle(answers) {
     const shuffled = answers.sort((a, b) => {
       if (a.key > b.key) {
@@ -13,10 +17,6 @@ class Questions extends React.Component {
       return 0;
     });
     return shuffled;
-  }
-
-  componentDidMount() {
-    this.props.loadQuestions();
   }
 
   renderNextButton(questionID, answered) {
