@@ -7,12 +7,12 @@ export default class Ranking extends Component {
     function compare(a, b) {
       const bandA = a.score;
       const bandB = b.score;
-      let comparison = 0;
+      const comparison = 0;
       if (bandA < bandB) {
-        return comparison == 1;
+        return comparison === 1;
       }
       if (bandA > bandB) {
-        return comparison == -1;
+        return comparison === -1;
       }
       return comparison;
     }
