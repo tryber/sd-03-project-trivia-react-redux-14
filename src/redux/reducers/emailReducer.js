@@ -11,7 +11,6 @@ const emailReducer = (state = initialState, action) => {
         ...state,
         email: action.payload,
       };
-
     default:
       return state;
   }

@@ -1,43 +1,90 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import Timer from './Timer';
 
-function categoryAndQuestion(questionsCategory, object, idTest) {
+import '../styles/questions.css';
+import updateAswer from '../redux/actions/answerAction';
+import NextQuestionButton from './NextQuestionButton';
+
+function categoryAndQuestion(questionsCategory, object, idTest, numb) {
   return (
     <p data-testid={idTest}>
-      {questionsCategory === undefined ?
-        'carregando...' : questionsCategory.map((categoryOrQuest) => categoryOrQuest[object])[0]}
+      {questionsCategory.map((categoryOrQuest) => categoryOrQuest[object])[numb]}
     </p>
   );
 }
 
-class Questions extends Component {
-  render() {
-    const { questionsCategory } = this.props;
-    return (
-      <div className="questions">
-        {categoryAndQuestion(questionsCategory, 'category', 'question-category')}
-        {categoryAndQuestion(questionsCategory, 'question', 'question-text')}
-        {questionsCategory === undefined ? 'carregando...' : questionsCategory.map((correctAnswer) =>
-          <button data-testid="correct-answer">
-            {correctAnswer.correct_answer}
-          </button>)[0]}
-        {questionsCategory === undefined ? 'carregando...' : questionsCategory.map((el) =>
-          el.incorrect_answers.map((incorrectAnswer, index) =>
-            <button data-testid={`wrong-answer-${index}`}>
-              {incorrectAnswer}
-            </button>))[0]}
-      </div>
-    );
+const updateScore = (score, prop, updateQuestions) => {
+  const oldScore = JSON.parse(localStorage.getItem('state'));
+  oldScore.player.score += score;
+  oldScore.player.assertions += prop;
+  const updatedScore = JSON.stringify(oldScore);
+  localStorage.setItem('state', updatedScore);
+  updateQuestions();
+};
+
+const Questions = ({ questionsCategory,
+  updateQuestions,
+  questionNumber: { questionNumber, loged, answer, timer } }) => {
+  if (!loged) return <Redirect to="/" />;
+  const difficultyValue = questionNumber < 5 && questionsCategory[questionNumber].difficulty;
+  let resultValue = 1;
+  if (difficultyValue === 'hard') {
+    resultValue = 3;
+  } else if (difficultyValue === 'medium') {
+    resultValue = 2;
   }
-}
+  return (
+    <div className="questions">
+      {categoryAndQuestion(questionsCategory, 'category', 'question-category', questionNumber)}
+      {categoryAndQuestion(questionsCategory, 'question', 'question-text', questionNumber)}
+      {questionsCategory.map((correctAnswer) =>
+        <button
+          className={answer ? 'correct-answer' : null}
+          data-testid="correct-answer"
+          onClick={() => updateScore(10 + (timer * resultValue), 1, updateQuestions)}
+          disabled={answer}
+        >
+          {correctAnswer.correct_answer}
+        </button>)[questionNumber]}
+      {questionsCategory.map((el) =>
+        el.incorrect_answers.map((incorrectAnswer, index) =>
+          <button
+            disabled={answer}
+            className={answer ? 'wrong-answer' : null}
+            data-testid={`wrong-answer-${index}`}
+            key={incorrectAnswer}
+            onClick={() => updateScore(0, 0, updateQuestions)}
+          >
+            {incorrectAnswer}
+          </button>))[questionNumber]}
+      {answer && <NextQuestionButton />}
+      {questionNumber < 5 && <Timer />}
+    </div>
+  );
+};
 
 const mapStateToProps = (state) => ({
   questionsCategory: state.questionsReducer.questions.results,
+  questionNumber: state.questionsReducer,
+});
+
+const dispatchPropsToState = (dispatch) => ({
+  updateQuestions: (e) => dispatch(updateAswer(e)),
 });
 
 Questions.propTypes = {
-  questionsCategory: PropTypes.func,
+  questionsCategory: PropTypes.string,
+  questionNumber: PropTypes.number,
+  updateQuestions: PropTypes.func,
 };
 
-export default connect(mapStateToProps)(Questions);
+Questions.defaultProps = {
+  questionsCategory: '',
+  questionNumber: '',
+  updateQuestions: '',
+};
+
+export default connect(mapStateToProps, dispatchPropsToState)(Questions);

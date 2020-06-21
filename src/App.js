@@ -6,26 +6,18 @@ import Home from './pages/Home';
 import GamePage from './pages/GamePage';
 
 import './App.css';
+import Feedback from './pages/Feedback';
+import Ranking from './pages/Ranking';
 
 export default function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route
-          exact
-          path="/"
-          component={Home}
-        />
-        <Route
-          exact
-          path="/settings"
-          component={Settings}
-        />
-        <Route
-          exact
-          path="/game"
-          component={GamePage}
-        />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/settings" component={Settings} />
+        <Route exact path="/game" component={GamePage} />
+        <Route exact path="/feedback" component={Feedback} />
+        <Route exact path="/ranking" component={Ranking} />
       </Switch>
     </BrowserRouter>
   );
