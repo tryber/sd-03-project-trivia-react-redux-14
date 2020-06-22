@@ -38,11 +38,11 @@ const Questions = ({ questionsCategory,
   }
 
   const test = (a) => {
-    let ok = 0
+    let position = 0
     const bandA = a.correct_answer.length;
-    if(bandA>5 && bandA<10) ok = 1
-    if(bandA>10) ok = 2
-    return ok
+    if(bandA>5 && bandA<10) position = 1
+    if(bandA>10) position = 2
+    return position
   }
 
   return (
