@@ -52,7 +52,7 @@ const Questions = ({ questionsCategory,
       {questionsCategory.map((correctAnswer) =>
         correctAnswer.incorrect_answers.map((incorrectAnswer, index) =>
           <div>
-            {index === test(correctAnswer) &&
+            { resultValue <= 2 && index === test(correctAnswer) &&
               <button
                 className={answer ? 'correct-answer' : null}
                 data-testid="correct-answer"
@@ -71,6 +71,16 @@ const Questions = ({ questionsCategory,
             >
               {incorrectAnswer}
             </button>
+            { resultValue > 2 && index === test(correctAnswer) &&
+              <button
+                className={answer ? 'correct-answer' : null}
+                data-testid="correct-answer"
+                onClick={() => updateScore(10 + (timer * resultValue), 1, updateQuestions)}
+                disabled={answer}
+              >
+                {correctAnswer.correct_answer}
+              </button>
+            }
           </div>),
       )[questionNumber]}
       {answer && <NextQuestionButton />}
