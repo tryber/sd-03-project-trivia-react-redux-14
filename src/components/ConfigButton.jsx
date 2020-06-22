@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../App.css'
 
 function ConfigButton() {
   return (
     <div>
       <Link to="/settings">
-        <button data-testid="btn-settings">Config.</button>
+        <button className='ButtonConfig' data-testid="btn-settings">Config.</button>
       </Link>
     </div>
   );

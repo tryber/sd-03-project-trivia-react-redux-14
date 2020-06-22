@@ -8,6 +8,8 @@ import updateName from '../redux/actions/nameAction';
 import updateQuestions from '../redux/actions/questionsAction';
 import ConfigButton from './ConfigButton';
 
+import '../App.css'
+
 const requestApi = async ({ email, name, dispatchQuestions }) => {
   const initialState = {
     player: {
@@ -20,7 +22,7 @@ const requestApi = async ({ email, name, dispatchQuestions }) => {
   const stringyState = JSON.stringify(initialState);
   localStorage.setItem('state', stringyState);
 
-  await tokenApi(dispatchQuestions);
+  await tokenApi();
   await fetch(`https://opentdb.com/api.php?amount=5&token=${localStorage.getItem('token')}`)
   .then((response) => response.json())
   .then((data) => dispatchQuestions(data));
@@ -37,7 +39,7 @@ const Start = (props) => {
   const { dispatchEmail, dispatchName, email, name, loged } = props;
   if (loged) return <Redirect to="/game" />;
   return (
-    <div>
+    <div className='FlexInput'>
       <ConfigButton />
       <label htmlFor="name">Insert your name</label>
       <input
@@ -51,6 +53,7 @@ const Start = (props) => {
         onChange={(e) => dispatchEmail(e.target.value)} data-testid="input-gravatar-email"
       />
       <button
+        className='ButtonConfig'
         disabled={disabledButton(email, name)}
         data-testid="btn-play"
         onClick={() => requestApi(props)}
