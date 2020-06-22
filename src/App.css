@@ -1,55 +1,107 @@
 .App {
+  align-items: center;
+  background-color: rgb(15, 163, 107);
+  color: white;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
   text-align: center;
 }
 
 .App-logo {
   height: 40vmin;
+  height: 20vmin;
   pointer-events: none;
+  position: relative;
+}
+
+.ButtonConfig {
+  background-color: black;
+  border: black;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  height: 30px;
+  margin: 15px;
+}
+
+.ButtonConfig:hover {
+  background-color: seagreen;
 }
 
 .red-border {
   border: 1px solid red;
 }
 
-.green-border {
-  border: 1px solid green;
-}
+@media ( prefers-reduced-motion : no-preference ) {
 
-@media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: shake infinite 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    animation : shake infinite 2.52s cubic-bezier(0.36, 0.17, 0.19, 0.97) both;
   }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes shake {
+
   10%, 90% {
-    transform: translate3d(-1px, 0, 0);
+    transform: translate3d(-3px, 0, 0);
   }
 
   20%, 80% {
-    transform: translate3d(2px, 0, 0);
+    transform: translate3d(5px, 0, 0);
   }
 
   30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
+    transform: translate3d(-10px, 0, 0);
   }
 
   40%, 60% {
-    transform: translate3d(4px, 0, 0);
+    transform: translate3d(10px, 0, 0);
   }
+}
+
+.correct-answer {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.wrong-answer {
+  border: 3px solid red;
+}
+
+.hide {
+  display: none;
+}
+
+.show {
+  background-color: black;
+  border: black;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-weight: 600;
+  height: 30px;
+  margin: 15px;
+  width: 175px;
+}
+
+.show:hover {
+  background-color: seagreen;
+}
+
+input {
+  border-radius: 15px;
+  height: 25px;
+}
+
+label {
+  font-size: 26px;
+  font-weight: 500;
+  text-shadow: 2px 2px #183111;
+}
+
+.FlexInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

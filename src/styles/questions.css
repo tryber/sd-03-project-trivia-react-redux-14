@@ -2,6 +2,47 @@
   border: 3px solid rgb(6, 240, 15);
 }
 
+.Game {
+  display:flex;
+  justify-content: center;
+}
+
+.GameContainer {
+  display: flex;
+  flex-direction: column;
+  font-size: 22px;
+  justify-content: center;
+  max-width: 800px;
+  text-align: center;
+}
+
+button {
+  font-size: 16px;
+}
+
 .wrong-answer {
   border: 3px solid red;
+}
+
+.GameHeader {
+  background-color: #20c997;
+  border-bottom: 2px solid #20a57d;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  font-size: 20px;
+  font-weight: 500;
+  height: 90px;
+  justify-content: space-around;
+}
+
+.PlayerHeader {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.Avatar {
+  border: inset 5px #59ccaa;
+  border-radius: 50%;
 }

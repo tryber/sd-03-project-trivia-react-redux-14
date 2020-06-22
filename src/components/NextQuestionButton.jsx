@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import MD5 from 'crypto-js/md5';
 import PropTypes from 'prop-types';
 import rehabilitate from '../redux/actions/rehabilitateButtonAction';
+import '../App.css'
 
 class NextQuestionButton extends Component {
   render() {
     const { questionNumber, rehabilitateTimer } = this.props;
     return (
       <button
+        className='show'
         data-testid="btn-next"
         onClick={() => {
           if (questionNumber >= 4) {

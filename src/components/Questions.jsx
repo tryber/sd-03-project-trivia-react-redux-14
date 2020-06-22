@@ -46,7 +46,7 @@ const Questions = ({ questionsCategory,
   }
 
   return (
-    <div className="questions">
+    <div className="questions GameContainer">
       {categoryAndQuestion(questionsCategory, 'category', 'question-category', questionNumber)}
       {categoryAndQuestion(questionsCategory, 'question', 'question-text', questionNumber)}
       {questionsCategory.map((correctAnswer) =>
