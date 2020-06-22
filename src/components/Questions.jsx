@@ -25,6 +25,14 @@ const updateScore = (score, prop, updateQuestions) => {
   updateQuestions();
 };
 
+const test = (a) => {
+  let position = 0;
+  const bandA = a.correct_answer.length;
+  if (bandA > 5 && bandA < 10) position = 1;
+  if (bandA > 10) position = 2;
+  return position;
+};
+
 const Questions = ({ questionsCategory,
   updateQuestions,
   questionNumber: { questionNumber, answer, loged, timer } }) => {
@@ -36,14 +44,6 @@ const Questions = ({ questionsCategory,
   } else if (difficultyValue === 'medium') {
     resultValue = 2;
   }
-
-  const test = (a) => {
-    let position = 0;
-    const bandA = a.correct_answer.length;
-    if (bandA > 5 && bandA < 10) position = 1;
-    if (bandA > 10) position = 2;
-    return position;
-  };
 
   return (
     <div className="questions">
