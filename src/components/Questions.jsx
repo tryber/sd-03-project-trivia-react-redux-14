@@ -27,7 +27,7 @@ const updateScore = (score, prop, updateQuestions) => {
 
 const Questions = ({ questionsCategory,
   updateQuestions,
-  questionNumber: { questionNumber, loged, timer } }) => {
+  questionNumber: { questionNumber, answer, loged, timer } }) => {
   if (!loged) return <Redirect to="/" />;
   const difficultyValue = questionNumber < 5 && questionsCategory[questionNumber].difficulty;
   let resultValue = 1;
@@ -38,12 +38,12 @@ const Questions = ({ questionsCategory,
   }
 
   const test = (a) => {
-    let position = 0
+    let position = 0;
     const bandA = a.correct_answer.length;
-    if(bandA>5 && bandA<10) position = 1
-    if(bandA>10) position = 2
-    return position
-  }
+    if (bandA > 5 && bandA < 10) position = 1;
+    if (bandA > 10) position = 2;
+    return position;
+  };
 
   return (
     <div className="questions">
@@ -51,27 +51,27 @@ const Questions = ({ questionsCategory,
       {categoryAndQuestion(questionsCategory, 'question', 'question-text', questionNumber)}
       {questionsCategory.map((correctAnswer) =>
         correctAnswer.incorrect_answers.map((incorrectAnswer, index) =>
-        <div>
-          {index===test(correctAnswer) && 
+          <div>
+            {index === test(correctAnswer) &&
+              <button
+                className={answer ? 'correct-answer' : null}
+                data-testid="correct-answer"
+                onClick={() => updateScore(10 + (timer * resultValue), 1, updateQuestions)}
+                disabled={answer}
+              >
+                {correctAnswer.correct_answer}
+              </button>
+            }
             <button
-              className={answer ? 'correct-answer' : null}
-              data-testid="correct-answer"
-              onClick={() => updateScore(10 + (timer * resultValue), 1, updateQuestions)}
               disabled={answer}
+              className={answer ? 'wrong-answer' : null}
+              data-testid={`wrong-answer-${index}`}
+              key={incorrectAnswer}
+              onClick={() => updateScore(0, 0, updateQuestions)}
             >
-              {correctAnswer.correct_answer}
+              {incorrectAnswer}
             </button>
-          }
-          <button
-            disabled={answer}
-            className={answer ? 'wrong-answer' : null}
-            data-testid={`wrong-answer-${index}`}
-            key={incorrectAnswer}
-            onClick={() => updateScore(0, 0, updateQuestions)}
-          >
-            {incorrectAnswer}
-          </button>
-        </div>)
+          </div>),
       )[questionNumber]}
       {answer && <NextQuestionButton />}
       {questionNumber < 5 && <Timer />}
